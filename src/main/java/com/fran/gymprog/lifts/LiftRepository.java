@@ -14,6 +14,10 @@ public class LiftRepository {
         return lifts;
     }
 
+    Lifts findById(Integer id){
+        return lifts.stream().filter(lifts -> lifts.getExerciseId() == id).findFirst().get();
+    }
+
     @PostConstruct
     private void init(){
         lifts.add(new Lifts(ExerciseType.BICEP_CURL, 30, 8, "02/11"));
