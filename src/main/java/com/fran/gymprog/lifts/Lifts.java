@@ -1,4 +1,5 @@
 package com.fran.gymprog.lifts;
+
 public record Lifts(ExerciseType exercise,
                     double weight,
                     int reps,
@@ -6,4 +7,5 @@ public record Lifts(ExerciseType exercise,
         public int getExerciseId() {
         return exercise.getId();
     }
+
 }

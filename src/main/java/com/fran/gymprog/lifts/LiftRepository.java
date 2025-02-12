@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class LiftRepository {
@@ -14,8 +15,23 @@ public class LiftRepository {
         return lifts;
     }
 
-    Lifts findById(Integer id){
-        return lifts.stream().filter(lifts -> lifts.getExerciseId() == id).findFirst().get();
+    Optional<Lifts> findById(Integer id){
+        return lifts.stream().filter(lifts -> lifts.getExerciseId() == id).findFirst();
+    }
+
+    void create(Lifts lift){
+        lifts.add(lift);
+    }
+
+    void update(Lifts lift, Integer id) {
+        Optional<Lifts> existingLift = findById(id);
+        if(existingLift.isPresent()){
+            lifts.set(lifts.indexOf(existingLift.get()), lift);
+        }
+    }
+
+    void delete(Integer id) {
+        lifts.removeIf(lift -> lift.getExerciseId() == id);
     }
 
     @PostConstruct
